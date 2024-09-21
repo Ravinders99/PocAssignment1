@@ -17,6 +17,15 @@ class RedisData(BaseModel):
     key: str
     field: str
     value: str
+    
+@app.get("/test_redis")
+def test_redis():
+    try:
+        redis_client.ping()
+        return {"message": "Redis connection successful"}
+    except Exception as e:
+        return {"error": str(e)}
+
 
 @app.get("/data/{key}")
 def get_data(key: str):
