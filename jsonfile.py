@@ -3,9 +3,9 @@ import requests
 import json
 
 # Connect to Redis Cloud
-redis_host = 'redis-19074.c241.us-east-1-4.ec2.redns.redis-cloud.com'
-redis_port = 19074
-redis_password = 'xBrz8lzAfBFXSlxD3opqbvxAzwwkquqE'
+redis_host = 'redis-19074.c241.'
+redis_port = 1
+redis_password = 'xBrz8lzAfBFXSuqE'
 
 redis_client = redis.StrictRedis(host=redis_host, port=redis_port, password=redis_password, decode_responses=True)
 
