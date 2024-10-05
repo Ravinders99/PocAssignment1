@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package nobel;
+
+// NobelService is the main service for querying Nobel Prize data.
+service NobelService {
+  // 1. Query: Total laureates by category between specific years
+  rpc CountLaureatesByCategory (CategoryRequest) returns (LaureateCountResponse);
+
+  // 2. Query: Total laureates containing a specific keyword in motivation
+  rpc CountLaureatesByKeyword (KeywordRequest) returns (LaureateCountResponse);
+
+  // 3. Query: Retrieve year, category, and motivation for a given laureate's first and last name
+  rpc GetLaureateDetails (LaureateRequest) returns (LaureateDetailsResponse);
+}
+
+// Request message for CountLaureatesByCategory
+message CategoryRequest {
+  string category = 1;
+  int32 start_year = 2;
+  int32 end_year = 3;
+}
+
+// Request message for CountLaureatesByKeyword
+message KeywordRequest {
+  string keyword = 1;
+}
+
+// Request message for GetLaureateDetails
+message LaureateRequest {
+  string firstname = 1;
+  string surname = 2;
+}
+
+// Response message for returning the count of laureates
+message LaureateCountResponse {
+  int32 count = 1;
+}
+
+// Response message for returning laureate details
+message LaureateDetailsResponse {
+  repeated LaureateDetails laureate_details = 1;
+}
+
+// Details of each laureate
+message LaureateDetails {
+  int32 year = 1;
+  string category = 2;
+  string motivation = 3;
+}
