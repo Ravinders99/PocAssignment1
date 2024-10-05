@@ -2,8 +2,8 @@ import grpc
 from concurrent import futures
 import redis
 import json
-from grpc_nobel import nobel_prize_pb2
-from grpc_nobel import nobel_prize_pb2_grpc
+import nobel_prize_pb2
+import nobel_prize_pb2_grpc
 
 # Redis connection configuration
 redis_host = 'redis-19074.c241.us-east-1-4.ec2.redns.redis-cloud.com'
