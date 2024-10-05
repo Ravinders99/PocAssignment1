@@ -2,8 +2,8 @@ import grpc
 from concurrent import futures
 import redis
 import json
-from grpc_nobel import nobel_prize_pb2
-from grpc_nobel import nobel_prize_pb2_grpc
+import nobel_prize_pb2
+import nobel_prize_pb2_grpc
 
 # Redis connection configuration
 redis_host = 'redis-19074.c241.us-east-1-4.ec2.redns.redis-cloud.com'
@@ -26,20 +26,40 @@ class NobelService(nobel_prize_pb2_grpc.NobelServiceServicer):
     def GetLaureateDetails(self, request, context):
         query = f"@firstname:{request.firstname} @surname:{request.surname}"
         result = redis_client.execute_command("FT.SEARCH", "prizeIndex", query)
+
+        # Print the full result from Redis for debugging purposes
+        print("Redis search result:", result)
+
         details = []
 
+        # Ensure the Redis result has at least two elements (count and first result)
+        if len(result) < 2:
+            return nobel_prize_pb2.LaureateDetailsResponse(laureate_details=[])
+
         # Parse the search results
-        for i in range(2, len(result), 2):  # Skip metadata elements
-            data = json.loads(result[i])
-            for laureate in data.get("laureates", []):
-                details.append(
-                    nobel_prize_pb2.LaureateDetails(
-                        year=data['year'],
-                        category=data['category'],
-                        motivation=laureate.get("motivation", "N/A")
+        for i in range(2, len(result), 2):  # Skip metadata elements (document IDs)
+            json_data = result[i]  # This should be a JSON string
+            print(f"Processing entry {i}: {json_data}")  # Debug entry being processed
+            try:
+                # Try to load the JSON data
+                data = json.loads(json_data)
+                for laureate in data.get("laureates", []):
+                    details.append(
+                        nobel_prize_pb2.LaureateDetails(
+                            year=data.get('year', "N/A"),
+                            category=data.get('category', "N/A"),
+                            motivation=laureate.get("motivation", "N/A")
+                        )
                     )
-                )
+            except json.JSONDecodeError as e:
+                print(f"Failed to decode JSON: {e}")
+                return nobel_prize_pb2.LaureateDetailsResponse(laureate_details=[])
+            except Exception as ex:
+                print(f"An unexpected error occurred: {ex}")
+                return nobel_prize_pb2.LaureateDetailsResponse(laureate_details=[])
+
         return nobel_prize_pb2.LaureateDetailsResponse(laureate_details=details)
+
 
 # Function to start the gRPC server
 def serve():

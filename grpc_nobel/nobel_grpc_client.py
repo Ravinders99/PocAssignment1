@@ -1,6 +1,6 @@
 import grpc
-from grpc_nobel import nobel_prize_pb2
-from grpc_nobel import nobel_prize_pb2_grpc
+import nobel_prize_pb2
+import nobel_prize_pb2_grpc
 
 def run():
     # Establish a connection with the gRPC server

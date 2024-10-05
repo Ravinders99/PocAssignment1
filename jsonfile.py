@@ -46,10 +46,9 @@ import requests
 import json
 
 # Connect to Redis Cloud
-redis_host = ''
-redis_port = 2
-redis_password = 'xBrz8lzAfopqbvxAzwwkquqE'
-
+redis_host = 'redis-17203.c251.east-us-mz.azure.redns.redis-cloud.com'
+redis_port = 17203
+redis_password = 'WkGWYEDSqarBqAphhlBxe7XjnLx81qaL'
 redis_client = redis.StrictRedis(host=redis_host, port=redis_port, password=redis_password, decode_responses=True)
 
 # Fetch Data from Nobel Prize API
@@ -123,4 +122,4 @@ print("Query 1: Total laureates in Physics between 2013 and 2018: ",
 print("Query 2: Total laureates with 'peace' in motivation: ",
       count_laureates_by_keyword("peace"))
 print("Query 3: Details of laureate with first name 'Alice' and surname 'Munro': ",
-      get_laureate_details("Alice", "Munro"))
+      get_laureate_details("Martin", "Karplus"))
