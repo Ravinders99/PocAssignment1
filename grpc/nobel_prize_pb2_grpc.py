@@ -3,7 +3,7 @@
 import grpc
 import warnings
 
-import nobel_prize_pb2 as noble__prize__pb2
+import noble_prize_pb2 as noble__prize__pb2
 
 GRPC_GENERATED_VERSION = '1.66.2'
 GRPC_VERSION = grpc.__version__
