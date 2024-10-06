@@ -38,7 +38,7 @@ class NobelService(nobel_prize_pb2_grpc.NobelServiceServicer):
 
         # Parse the search results
         for i in range(2, len(result), 2):  # Skip metadata elements (document IDs)
-            json_data = result[i]  # This should be a JSON string
+            json_data = result[i][1]  # This should be a JSON string , add [1]
             print(f"Processing entry {i}: {json_data}")  # Debug entry being processed
             try:
                 # Try to load the JSON data
