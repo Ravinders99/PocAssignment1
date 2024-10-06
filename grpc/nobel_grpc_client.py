@@ -10,7 +10,7 @@ def run():
         # 1. Query 1: Count laureates by category
         print("Running Query 1: Count Laureates By Category (Physics, 2013-2018)...")
         response = stub.CountLaureatesByCategory(
-            nobel_prize_pb2.CategoryRequest(category="physics", start_year=2013, end_year=2018)
+            nobel_prize_pb2.CategoryRequest(category="physics", start_year=2013, end_year=2023)
         )
         print(f"Total laureates in Physics (2013-2018): {response.count}\n")
 
