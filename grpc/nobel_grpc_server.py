@@ -6,9 +6,9 @@ import nobel_prize_pb2
 import nobel_prize_pb2_grpc
 
 # Redis connection configuration
-redis_host = 'redis-19074.c241.us-east-1-4.ec2.redns.redis-cloud.com'
-redis_port = 19074
-redis_password = 'xBrz8lzAfBFXSlxD3opqbvxAzwwkquqE'
+redis_host = 'redis-19074.c2411-4.ec2.redns.redis-cloud.com'
+redis_port = 1907
+redis_password = 'xBrz8lXSlxD3opqbvxAzwwkquqE'
 redis_client = redis.StrictRedis(host=redis_host, port=redis_port, password=redis_password, decode_responses=True)
 
 # Implement the NobelService Servicer

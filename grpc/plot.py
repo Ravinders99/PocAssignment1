@@ -18,7 +18,7 @@ def plot_boxplot(filename, title):
 
 def main():
     # Plot for each query
-    plot_boxplot("category_query_durations.csv", "Category Query Durations (Physics, 2013-2018)")
+    plot_boxplot("category_query_durations.csv", "Category Query Durations (Physics, 2013-2023)")
     plot_boxplot("keyword_query_durations.csv", "Keyword Query Durations (Keyword: 'peace')")
     plot_boxplot("details_query_durations.csv", "Details Query Durations (Firstname: 'Alice', Surname: 'Munro')")
 

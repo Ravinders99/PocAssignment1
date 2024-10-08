@@ -47,6 +47,8 @@ def get_laureate_details(stub, request):
 
 
 def run():
+    # with grpc.insecure_channel('https://grpc-server-client.victoriousfield-b092448d.canadaeast.azurecontainerapps.io') as channel:
+    #     stub = nobel_prize_pb2_grpc.NobelServiceStub(channel)
     with grpc.insecure_channel('localhost:50051') as channel:
         stub = nobel_prize_pb2_grpc.NobelServiceStub(channel)
 
