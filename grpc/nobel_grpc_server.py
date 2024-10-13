@@ -6,9 +6,9 @@ import nobel_prize_pb2
 import nobel_prize_pb2_grpc
 
 # Redis connection configuration
-redis_host = 'redis-19074.c2411-4.ec2.redns.redis-cloud.com'
-redis_port = 1907
-redis_password = 'xBrz8lXSlxD3opqbvxAzwwkquqE'
+redis_host = 'redis-19074.c241.us-east-1-4.ec2.redns.redis-cloud.com'
+redis_port = 19074
+redis_password = 'xBrz8lzAfBFXSlxD3opqbvxAzwwkquqE'
 redis_client = redis.StrictRedis(host=redis_host, port=redis_port, password=redis_password, decode_responses=True)
 
 # Implement the NobelService Servicer
@@ -60,15 +60,22 @@ class NobelService(nobel_prize_pb2_grpc.NobelServiceServicer):
 
         return nobel_prize_pb2.LaureateDetailsResponse(laureate_details=details)
 
+try:
+    redis_client.ping()
+    print("Redis is accessible!")
+except redis.ConnectionError as e:
+    print(f"Failed to connect to Redis: {e}")
 
 # Function to start the gRPC server
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     nobel_prize_pb2_grpc.add_NobelServiceServicer_to_server(NobelService(), server)
-    server.add_insecure_port('[::]:50051')
+    # server.add_insecure_port('[::]:50051')
+    server.add_insecure_port('0.0.0.0:50051') # updated line 
     server.start()
     print("gRPC Server is running on port 50051...")
     server.wait_for_termination()
 
 if __name__ == "__main__":
     serve()
+
