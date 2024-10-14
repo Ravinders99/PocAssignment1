@@ -3,9 +3,9 @@ import requests
 import json
 
 # Connect to Redis Cloud
-redis_host = 'redis-17203.c251.east-us-mz.azure.redns.redis-cloud.com'
-redis_port = 17203
-redis_password = 'WkGWYEDSqarBqAphhlBxe7XjnLx81qaL'
+redis_host = 'redis-17203.c2dns.redis-cloud.com'
+redis_port = 103
+redis_password = 'WkGWYEDSqarBqAphx81qaL'
 redis_client = redis.StrictRedis(host=redis_host, port=redis_port, password=redis_password, decode_responses=True)
 
 # Fetch Data from Nobel Prize API
