@@ -4,11 +4,12 @@ import nobel_prize_pb2_grpc
 
 def run():
     # Establish a connection with the gRPC server
-    with grpc.insecure_channel('localhost:50051') as channel:
+    # with grpc.insecure_channel('localhost:50051') as channel:
+    with grpc.insecure_channel('20.116.218.163:50051') as channel:
+
         stub = nobel_prize_pb2_grpc.NobelServiceStub(channel)
     # Replace 'localhost:50051' with your cloud endpoint
-    # with grpc.insecure_channel('grpc-server-d6e6cnfqdwbsfgfj.canadacentral-01.azurewebsites.net') as channel:
-    #     stub = nobel_prize_pb2_grpc.NobelServiceStub(channel)
+    
 
 
         # 1. Query 1: Count laureates by category

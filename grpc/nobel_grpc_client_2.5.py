@@ -49,7 +49,7 @@ def get_laureate_details(stub, request):
 def run():
     # with grpc.insecure_channel('https://grpc-server-01-ajbbaka7b5h8caeh.canadacentral-01.azurewebsites.net/') as channel:
     #     stub = nobel_prize_pb2_grpc.NobelServiceStub(channel)
-    with grpc.insecure_channel('localhost:50051') as channel:
+    with grpc.insecure_channel('20.116.218.163:50051') as channel:
         stub = nobel_prize_pb2_grpc.NobelServiceStub(channel)
 
         # 1. Query 1: Count laureates by category
